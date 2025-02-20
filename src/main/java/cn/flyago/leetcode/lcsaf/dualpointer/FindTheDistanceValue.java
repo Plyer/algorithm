@@ -39,4 +39,25 @@ public class FindTheDistanceValue {
         }
         return res;
     }
+
+    public int findTheDistanceValue2(int[] arr1, int[] arr2, int d) {
+        Arrays.sort(arr2);
+        int res = 0;
+        for (int x : arr1) {
+            int t = x - d;
+            int l = 0, r = arr2.length - 1;
+            while (l <= r) {
+                int mid = l + (r - l) / 2;
+                if (arr2[mid] < t) {
+                    l = mid + 1;
+                } else {
+                    r = mid - 1;
+                }
+            }
+            if (l == arr2.length || arr2[l] > x + d) {
+                res++;
+            }
+        }
+        return res;
+    }
 }
