@@ -27,4 +27,19 @@ public class NumSubarraysWithSum {
         }
         return res;
     }
+
+    // 求非空子数组和大于等于 t 的子数组数量
+    // 子数组和至少 >=k 的滑窗：当窗口内的和 >=k 时，左指针不变，当前右指针直到数组末尾的子数组的和都 >=k，所以 res+=n-r，循环缩减窗口直到子数组和 <=k，循环过程中的结果都要记录，继续枚举直到右指针达到末尾。
+    private int slidingWindo2(int[] nums, int t) {
+        int res = 0, sum = 0;
+        int n = nums.length;
+        for (int l = 0, r = 0; r < n; r++) {
+            sum += nums[r];
+            while (sum >= t && l <= r) {
+                res += n - r;
+                sum -= nums[l++];
+            }
+        }
+        return res;
+    }
 }
