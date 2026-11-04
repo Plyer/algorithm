@@ -23,4 +23,36 @@ public class NumSubarrayProductLessThanK {
         }
         return res;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public int numSubarrayProductLessThanK2(int[] nums, int k) {
+        if (k == 0) {
+            return 0;
+        }
+        int m = 1, ans = 0;
+        for (int l = 0, r = 0; r < nums.length; r++) {
+            m *= nums[r];
+            while (m >= k && l <= r) {
+                m /= nums[l++];
+            }
+            ans += r - l + 1;
+        }
+        return ans;
+    }
 }

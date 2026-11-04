@@ -17,4 +17,20 @@ public class LongestOnes {
         }
         return res;
     }
+
+    public int longestOnes2(int[] nums, int k) {
+        int zeroCnt = 0, ans = 0;
+        for (int l = 0, r = 0; r < nums.length; r++) {
+            zeroCnt += nums[r] ^ 1;
+            while (zeroCnt > k) {
+                zeroCnt -= nums[l++] ^ 1;
+            }
+            ans = Math.max(ans, r - l + 1);
+        }
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        new LongestOnes().longestOnes2(new int[]{1,1,1,0,0,0,1,1,1,1,0}, 2);
+    }
 }
