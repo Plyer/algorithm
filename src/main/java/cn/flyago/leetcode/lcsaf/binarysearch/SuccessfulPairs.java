@@ -32,4 +32,28 @@ public class SuccessfulPairs {
         }
         return res;
     }
+
+
+    public int[] successfulPairs2(int[] spells, int[] potions, long success) {
+        Arrays.sort(potions);
+        int n = potions.length;
+        for (int i = 0; i < spells.length; i++) {
+            long x = (long) Math.ceil(success / (double) spells[i]);
+            spells[i] = n - lowerBound(potions, x);
+        }
+        return spells;
+    }
+
+    private int lowerBound(int[] nums, long x) {
+        int l = 0, r = nums.length;
+        while (l < r) {
+            int mid = l + (r - l) / 2;
+            if (nums[mid] >= x) {
+                r = mid;
+            } else {
+                l = mid + 1;
+            }
+        }
+        return r;
+    }
 }
